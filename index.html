@@ -4,63 +4,125 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Puchku Surprise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400&display=swap" rel="stylesheet">
     <style>
-        /* ... Your existing CSS remains here ... */
+        /* BASE STYLES */
         body {
             margin: 0;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            font-family: Arial, Helvetica, sans-serif;
-            color: white;
+            /* New Romantic Gradient: Soft Rose to Lavender */
+            background: linear-gradient(135deg, #FFB6C1, #E6E6FA); /* Light Pink to Lavender */
+            font-family: 'Poppins', Arial, sans-serif;
+            color: #4A4A4A; /* Darker, softer text color for contrast */
             text-align: center;
+            overflow: hidden; /* Hide floating hearts outside the view */
         }
         .container {
             padding: 20px;
+            z-index: 10; /* Ensure text is above the floating hearts */
         }
+        
+        /* HEADLINE */
         h1 {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
+            /* Elegant Font for Headline */
+            font-family: 'Dancing Script', cursive; 
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            color: #8B0000; /* Deep Romantic Red */
             animation: fadeIn 2s ease-in-out;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
         }
         p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             opacity: 0.9;
+            color: #555;
+            margin-top: 5px;
         }
+
+        /* BUTTON STYLE */
         button {
-            margin-top: 25px;
-            padding: 12px 25px;
-            font-size: 1rem;
+            margin-top: 35px;
+            padding: 15px 30px;
+            font-size: 1.1rem;
             border: none;
-            border-radius: 30px;
+            border-radius: 40px;
             cursor: pointer;
-            background: white;
-            color: #ff5f7e;
+            /* Deep Rose Pink Button Background */
+            background: #FF69B4; 
+            color: white; 
             font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease; /* Added transition for smooth effect */
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.5); /* Pink shadow */
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
         }
         button:hover {
-            transform: scale(1.05);
+            transform: scale(1.1);
+            background: #FF4F9E; /* Slightly darker on hover */
         }
+
+        /* ANIMATIONS */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* FLOATING HEARTS EFFECT */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #FFC0CB; /* Light Pink */
+            transform: rotate(-45deg);
+            z-index: 1;
+            animation: float 10s infinite linear;
+            opacity: 0.8;
+        }
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #FFC0CB;
+        }
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
+        .heart:after {
+            left: 10px;
+            top: 0;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(-45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(-45deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Puchku 💖 something is coming…</h1>
-        <p>Tap the button below 🎶</p>
-        <button id="surpriseButton" onclick="toggleSong()">Play Surprise</button>
+        <h1>My Dearest Puchku, a surprise awaits...</h1>
+        <p>Click the button to unlock the magic ✨</p>
+        <button id="surpriseButton" onclick="toggleSong()">Play My Heart Song</button>
+        
         <audio id="song">
             <source src="Admirin You.mp3" type="audio/mpeg" /> 
             Your browser does not support the audio element.
         </audio>
     </div>
+
+    <div class="heart" style="left: 10%; animation-duration: 8s; animation-delay: 0s;"></div>
+    <div class="heart" style="left: 25%; animation-duration: 12s; animation-delay: 1s;"></div>
+    <div class="heart" style="left: 50%; animation-duration: 9s; animation-delay: 2s;"></div>
+    <div class="heart" style="left: 70%; animation-duration: 15s; animation-delay: 3s;"></div>
+    <div class="heart" style="left: 90%; animation-duration: 11s; animation-delay: 4s;"></div>
+    <div class="heart" style="left: 40%; animation-duration: 7s; animation-delay: 5s;"></div>
+
 
     <script>
         function toggleSong() {
@@ -72,17 +134,16 @@
                 audio.currentTime = 49; // Start at 49 seconds
                 audio.play()
                     .then(() => {
-                        button.textContent = "Pause Surprise";
+                        button.textContent = "Pause Song";
                     })
                     .catch(error => {
-                        // Handle potential play errors (though unlikely after user click)
                         console.error("Audio play failed:", error);
-                        alert("Could not play the audio. Check the file path.");
+                        alert("Could not play the audio. Please ensure 'Admirin You.mp3' is uploaded.");
                     });
             } else {
                 // If playing, pause the song
                 audio.pause();
-                button.textContent = "Play Surprise";
+                button.textContent = "Play My Heart Song";
             }
         }
     </script>
